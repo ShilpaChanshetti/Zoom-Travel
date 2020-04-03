@@ -20,9 +20,10 @@ def home():
 def aboutUs():
     return render_template('about-us.html')
 
-@app.route('/error')
-def error():
-    return render_template('error.html')
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('error.html'), 404
 
 if __name__ == '__main__':
     app.run()
