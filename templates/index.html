@@ -32,8 +32,8 @@
     <div class="container">
 	  <img src="{{url_for('static', filename='img/logo2.png')}}"  width="300" height="65" alt="oops! There an issue with taking the image on board">
 	  <div>
-      <a class="btn btn-primary"  href="#">Sign In</a>
-	  <a class="btn btn-primary"  href="#">Sign Up</a>
+      <a class="btn btn-primary"  href="{{url_for('signup_form')}}">Sign In</a>
+	  <a class="btn btn-primary"  href="{{url_for('login_form')}}">Sign Up</a>
 	  </div>
     </div>
   </nav>
