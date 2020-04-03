@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # from flask import Flask, render_template
 # import datetime
 # import re
@@ -9,27 +8,7 @@
 #     #print('s')
 #     return render_template('index.html')
 
-from flask import Flask, render_template
-app = Flask(__name__)
-
-
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-@app.route('/about')
-def aboutUs():
-    return render_template('about-us.html')
-
-@app.errorhandler(404)
-def page_not_found(e):
-    # note that we set the 404 status explicitly
-    return render_template('error.html'), 404
-
-if __name__ == '__main__':
-    app.run()
-=======
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template,request, url_for, redirect, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import datetime
@@ -46,10 +25,20 @@ app.config['MYSQL_DB'] = 'ISD'
 # Intialize MySQL
 mysql = MySQL(app)
 
-@app.route("/")
+
+@app.route('/')
 def index():
     #print(url_for('Login'))
     return render_template('index.html')
+
+@app.route('/about')
+def aboutUs():
+    return render_template('about-us.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('error.html'), 404
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup_form():
@@ -85,4 +74,6 @@ def login_form():
     # show the form, it wasn't submitted
     return render_template('Login.html')
 
->>>>>>> Stashed changes
+if __name__ == '__main__':
+    app.run()
+
