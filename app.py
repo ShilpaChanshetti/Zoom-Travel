@@ -4,6 +4,6 @@ import re
 app = Flask(__name__)
 
 @app.route("/")
-def dfzdf():
-    print('s')
+def home():
+    #print('s')
     return render_template('index.html')
