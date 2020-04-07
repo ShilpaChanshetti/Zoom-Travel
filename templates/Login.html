@@ -10,7 +10,7 @@
   <title>Login/Signup Form With Slider</title>
   
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css'>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loginStyle.css')}}" />
   
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" />
@@ -19,7 +19,6 @@
    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" />
    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css')}}" />
    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
 </head>
 <body>
 <div class="main-box">
@@ -46,38 +45,38 @@
   <div class="form-cont">
     <div class="top-buttons">
       <img class="logo" src="{{url_for('static', filename='img/logo2.png')}}"/>
-      <button  class="to-signup top-active-button">
+      <button  id="signUpBtn" class="to-signup top-active-button">
         Sign Up
       </button>
-      <button class="to-signin">
+      <button id="signInBtn" class="to-signin">
         Sign In
       </button>
     </div>
     
     <div class="form form-signup">
-      <form action="#">
+      <form action="{{ url_for('signup_save') }}" method="post" autocomplete="off">
         <label><b>FULL NAME</b></label>
-        <input type="text"placeholder="Your full name" >
+        <input type="text" name="name" placeholder="Your full name" >
+       
         <label><b>E-MAIL</b></label>
-        <input type="email" 
-               placeholder="Your e-mail">
+        <input type="email" name="email" placeholder="Your e-mail">
+        
         <label><b>PASSWORD</b></label>
-        <input type="password" 
-               placeholder="Your password">
+        <input type="password" name="password" placeholder="Your password">
+
         <p class="terms">
           <input type="checkbox">
           I agree all statments in 
           <a href="#" class="lined-link">terms of service</a>
         </p>
-        <input type="submit"
-               class="form-btn"
-               value="Sign Up"/>
+        <input type="submit" class="form-btn" value="sign up"/>
+     
         <a href="#" class="lined-link to-signin-link">I'm already member</a>
       </form>
     </div>
 
     <div class="form form-signin">
-      <form action="#">
+      <form action="{{ url_for('signin_auth') }}" method="post">
         <label><b>E-MAIL</b></label>
         <input type="email" name="email" placeholder="Your e-mail" id = "email">
         <label><b>PASSWORD</b></label>
@@ -85,17 +84,58 @@
         <input type="submit"
                class="form-btn"
                value="Sign In"/>
+               
         <a href="#" class="lined-link to-signup-link">Create new account</a>
       </form>
     </div>
   </div>
   <div class="clear-fix"></div>
 </div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js'></script>
-<script src="{{url_for('static', filename='script.js')}}"></script>
 
+   <!-- Modal -->
+   <div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> {{ msg_type }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{ msg }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src="{{url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js'></script>
+<script src="{{url_for('static', filename='loginScript.js')}}"></script>
+<script>
+  $(document).ready(function(){
+    debugger;
+    try{
+    let msg = '{{ msg }}';
+    if(msg != '')
+      $("#mainModal").modal('show');
+    let sType = '{{ sType }}';
+   
+    if(sType=="signIn")
+    {
+      $("#signInBtn").click();
+    }
+  }catch(e)
+  {
+    console.log(e);
+  }
+  });
+</script>
 
 </body>
 </html>

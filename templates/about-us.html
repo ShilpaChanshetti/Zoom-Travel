@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-  <meta charset="UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
   <title>Zoom Travel</title>
     <!-- Bootstrap core CSS -->
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.8/typicons.min.css'><link rel="stylesheet" href="/style.css">
-  <!-- Custom fonts for this template -->
-  <link href="https://kit.fontawesome.com/0561a26e05.js" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.8/typicons.min.css'>
+ 
+<!-- Custom fonts for this template -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css')}}" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
-  <link href="../static/css/landing-page.css" rel="stylesheet">
-<style>
+  <link href="../static/css/landing-page.css" rel="stylesheet"><style>
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700,300italic,400italic,700italic");
 
 /* Base Styles
@@ -242,7 +247,7 @@ header {
 	-webkit-justify-content: center;
 	-ms-flex-pack: center;
 	justify-content: center;
- width: 100%%;
+ 	width: 100%;
 	height: 100vh;
 	background: #e55d87;
 	background: -moz-linear-gradient(-45deg, #F47635 0%, #5fc3e4 100%);
@@ -313,7 +318,7 @@ header {
 	width: 100%;
 	padding-top: 17px;
 	background: none;
-	overflow: hiddengrad
+	overflow: hiddengrad;
 	-webkit-transition: all 0.3s;
 	transition: all 0.3s;
 	opacity: 0;
@@ -475,6 +480,28 @@ opacity: 0;
 #about {
 	padding: 100px 0 50px 0;
 }
+
+.features-icons {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.features-icons .features-icons-item {
+  max-width: 20rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon {
+  height: 7rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon i {
+  font-size: 4.5rem;
+  color: #FF9F31;
+}
+
+.features-icons .features-icons-item:hover .features-icons-icon i {
+  font-size: 5rem;
+}
 /* Team Section
 ********************************************************************* */
 #team {
@@ -483,8 +510,6 @@ opacity: 0;
 #team .icon {
 	font-size: 26px;
 }
-
-
 
 /* Contact Section
 ********************************************************************* */
@@ -606,10 +631,10 @@ pre, blockquote, dl, figure, table, p, ul, ol, form {
 .block {
 	width: 70px;
 	height: 2px;
-	background: #e55d87; /* Old browsers */
-	background: -moz-linear-gradient(-45deg, (#FF9F31 0%, #4DA0FF 100%);
-	background: -webkit-linear-gradient(-45deg, (#FF9F31 0%, #4DA0FF 100%);
-	background: linear-gradient(135deg, (#FF9F31 0%, #4DA0FF 100%);
+	/* background: #e55d87; Old browsers */
+	background: -moz-linear-gradient(-45deg, (#FF9F31 0%, #4DA0FF 100%));
+	background: -webkit-linear-gradient(-45deg, (#FF9F31 0%, #4DA0FF 100%));
+	background: linear-gradient(135deg, (#FF9F31 0%, #4DA0FF 100%));
 	margin-bottom: 50px;
 }
 
@@ -696,35 +721,45 @@ background-color:#f8f9fa!important
 <!-- Team Section
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->  
 
-<section id="team">
+<section id="team text-center">
   <div class="container">
     <div class="row">
-      <h1>Meet the Builders</h1>
+      <h1>Meet the Team</h1>
       <div class="block"></div>
       <p><em>"The strength of the Team is each individual member. The strength of each member is the Team"</em></p>
     </div>
-    
-	<div class="row">
-      
-	  <div class="three columns"> <img src="../static/img/arpita.jpg" width="220" height="220" alt=""/>
-        
+    <div class="row">
+	<div class="col-sm-3">
+	  <div class="m-auto"> <img src="../static/img/arpita.jpg" width="220" height="220" alt=""/>
 		<h4>Arpita Deshmukh</h4>
         <p>Senior Designer</p>
-        <span class="typcn typcn-social-facebook-circular icon"></span><span class="typcn typcn-social-instagram-circular icon"></span><span class="typcn typcn-social-google-plus-circular icon"></span><span class="typcn typcn-social-linkedin-circular icon"></span> </div>
-      <div class="three columns"> <img src="../static/img/mary.jpg" width="220" height="220" alt=""/>
-        <h4>Mary Huang</h4>
+		<span class="typcn typcn-social-facebook-circular icon"></span><span class="typcn typcn-social-instagram-circular icon"></span><span class="typcn typcn-social-google-plus-circular icon"></span><span class="typcn typcn-social-linkedin-circular icon"></span> 
+		</div>
+	</div>
+	  
+	<div class="col-sm-3">
+		<div class="m-auto"> <img src="../static/img/mary.jpg" width="220" height="220" alt=""/>
+		<h4>Mary Huang</h4>
         <p>Senior Designer</p>
-        <span class="typcn typcn-social-facebook-circular icon"></span><span class="typcn typcn-social-instagram-circular icon"></span><span class="typcn typcn-social-google-plus-circular icon"></span><span class="typcn typcn-social-linkedin-circular icon"></span> </div>
-      <div class="three columns"> <img src="../static/img/shilpa.jpg" width="220" height="220" alt=""/>
-        <h4>Shilpa Chanshetti</h4>
+		<span class="typcn typcn-social-facebook-circular icon"></span><span class="typcn typcn-social-instagram-circular icon"></span><span class="typcn typcn-social-google-plus-circular icon"></span><span class="typcn typcn-social-linkedin-circular icon"></span> 
+	</div>
+	</div>
+
+	<div class="col-sm-3">
+		<div class="m-auto"> <img src="../static/img/shilpa.jpg" width="220" height="220" alt=""/>
+		<h4>Shilpa Chanshetti</h4>
         <p>Product Designer</p>
         <span class="typcn typcn-social-facebook-circular icon"></span><span class="typcn typcn-social-instagram-circular icon"></span><span class="typcn typcn-social-google-plus-circular icon"></span><span class="typcn typcn-social-linkedin-circular icon"></span> </div>
-      <div class="three columns"> <img src="../static/img/sneha.jpg" width="220" height="220" alt=""/>
-        <h4>S. Sneha Bhat</h4>
+	</div>
+
+	<div class="col-sm-3">
+		<div class="m-auto"> <img src="../static/img/sneha.jpg" width="220" height="220" alt=""/>
+		<h4>S. Sneha Bhat</h4>
         <p>UX Design Lead </p>
         <span class="typcn typcn-social-facebook-circular icon"></span><span class="typcn typcn-social-instagram-circular icon"></span><span class="typcn typcn-social-google-plus-circular icon"></span><span class="typcn typcn-social-linkedin-circular icon"></span> </div>
     </div>
   </div>
+</div>
 </section>
 
 
@@ -732,11 +767,11 @@ background-color:#f8f9fa!important
 <!-- Contact Section
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->  
 
-<section id="contact">
+<section id="contact" class = "features-icons bg-light text-center">
   <div class="container">
-    <h1>Contact Us</h1>
+    <h1>Get in Touch!</h1>
     <div class="block"></div>
-    <form>
+    <!-- <form>
       <div class="row">
         
 		<div class="six columns">
@@ -755,67 +790,108 @@ background-color:#f8f9fa!important
         <input class="button-primary" type="submit" value="Submit">
       </div>
     </form>
-  </div>
+  </div> -->
+      <div class="row">
+        <div class="col-lg">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="fa fa-phone m-auto"></i>
+            </div>
+			<h3>Call us</h3>
+			<p class ="m-auto text-center" >(979)-888-777</p>
+          </div>
+        </div>
+        <div class="col-lg">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="fas fa-map-marker-alt m-auto"></i>
+            </div>
+			<h3>Find us</h3>
+			<p class ="m-auto text-center" >Mays Business School, Texas A&M University</p>
+          </div>
+        </div>
+        <div class="col-lg">
+          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="fas fa-envelope m-auto"></i>
+            </div>
+			<h3>Email us</h3>
+			<p class ="m-auto text-center" >zoomtravel@tamu.edu</p>
+          </div>
+        </div>
 </section>
 
 <!-- Footer Section
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->  
-
-<!-- Footer -->
-  <footer class="footer bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 h-100 text-center text-lg-left my-auto">
-          <ul class="list-inline mb-2">
-            <li class="list-inline-item">
-              <a href="#">About</a>
-            </li>
-            <!-- <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Contact</a>
-            </li> -->
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
-            </li>
-          </ul>
-          <p class="text-muted small mb-4 mb-lg-0">&copy; Developed by Team 13.</p>
-        </div>
-		<div class="col-lg-4 h-100 text-center text-lg-center my-auto">
-		<div class="scroll-up">
-        <a href="#"><i class="fa fa-angle-double-up"></i></a>
-	    </div>
-        </div>		
-        <div class="col-lg-4 h-100 text-center text-lg-right my-auto">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item mr-3">
-              <a href="#">
-                <i class="fab fa-facebook fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item mr-3">
-              <a href="#">
-                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-instagram fa-2x fa-fw"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+    <!-- Footer -->
+	<footer class="footer bg-light">
+		<div class="container">
+		  <div class="row">
+			<div class="col-lg-4 h-100 text-center text-lg-left my-auto">
+			  <ul class="list-inline mb-2">
+				<li class="list-inline-item">
+				  <a href="/about">About</a>
+				</li>
+				<li class="list-inline-item">&sdot;</li>
+				<li class="list-inline-item">
+				  <a href="{{url_for('contactUs')}}">Contact</a>
+				</li>
+				<li class="list-inline-item">&sdot;</li>
+				<li class="list-inline-item">
+				  <a href="#">Terms of Use</a>
+				</li>
+			  </ul>
+			  <p class="text-muted small mb-4 mb-lg-0">&copy; Developed by Team 13.</p>
+			</div>
+			<div class="col-lg-4 h-100 text-center text-lg-center my-auto">
+			<div class="scroll-up">
+			<a href="#"><i class="fa fa-angle-double-up"></i></a>
+			</div>
+			</div>		
+			<div class="col-lg-4 h-100 text-center text-lg-right my-auto">
+			  <ul class="list-inline mb-0">
+				<li class="list-inline-item mr-3">
+				  <a href="#">
+					<i class="fab fa-facebook fa-2x fa-fw"></i>
+				  </a>
+				</li>
+				<li class="list-inline-item mr-3">
+				  <a href="#">
+					<i class="fab fa-twitter-square fa-2x fa-fw"></i>
+				  </a>
+				</li>
+				<li class="list-inline-item">
+				  <a href="#">
+					<i class="fab fa-instagram fa-2x fa-fw"></i>
+				  </a>
+				</li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+	  </footer>
 
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script><script  src="./script.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script>
+<script>
+	$(document).ready(function(){
+	  try{
+	  let sType = '{{ msg }}';
+	
+	  if(sType=="contactUs")
+	  {
+		$('html, body').animate({
+        scrollTop: $("#contact").offset().top
+    }, 0);
+	  }
+	}catch(e)
+	{
+	  console.log(e);
+	}
+	});
+  </script>
+  
 
 </body>
 </html>

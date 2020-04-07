@@ -1,0 +1,84 @@
+
+/************ Start Form Container **************/
+
+.top-buttons {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 15%;
+  padding: 15px;
+  text-align: right;
+}
+
+.logo {
+  height: 70px !important;
+  text-align: left !important;
+  float: left;
+  
+}
+
+.top-buttons a {
+  color: #fff;
+  border: none;
+  width: 90px;
+  margin: auto;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  background: #007bff;
+  cursor: pointer;
+  margin-top: 12px;
+  text-decoration: none;
+}
+
+.top-buttons a:nth-child(1) {
+  border-radius: 5px 5px 5px 5px;
+}
+
+.top-buttons a:nth-child(2) {
+  border-radius: 5px 5px 5px 5px;
+}
+
+.top-active-button {
+  color: #000 !important;
+  box-shadow: 0 0 20px #2a2a2a;
+  background: #4DA0FF !important;
+  transition: all 0.3s ease;
+}
+
+@media(max-width: 768px) {
+	  .slider-cont {
+    display: none;
+  }
+  
+    .top-buttons {
+	text-align: center;
+	height: auto;
+    width: 100%;	
+  }
+  
+ .top-buttons a {
+	   display: block;
+		float: none;
+		text-decoration: none;
+		width: 100%;	
+		height: auto;
+	}
+  
+  .top-buttons a:nth-child(1) {
+  border-radius: 50px 50px 50px 50px;
+  margin-top: 50px;
+}
+
+.top-buttons a:nth-child(2) {
+  border-radius: 50px 50px 50px 50px;
+}
+
+.logo {
+    height: 70px !important;
+    text-align: left !important;
+    /* float: left; */
+    
+  }
+  
+}

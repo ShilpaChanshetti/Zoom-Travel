@@ -14,78 +14,103 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="https://kit.fontawesome.com/0561a26e05.js" rel="stylesheet">
+  <!-- <link href="https://kit.fontawesome.com/0561a26e05.js" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
+
+   <!-- Custom fonts for this template -->
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" />
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css')}}" />
 
   <!-- Custom styles for this template -->
-  <link href="../static/css/landing-page.min.css" rel="stylesheet">
+ <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landing-page.min.css')}}" /> -->
+ <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landing-page2.css')}}" />
 </head>
+<style>
+  footer.footer {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  }
+.header.masthead {
+  position: relative;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+@media (min-width: 768px) {
+  header.masthead {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+  }
+  header.masthead h1 {
+    font-size: 3rem;
+  }
+}
+
+</style>
 
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-light bg-light static-top">
-    <div class="container">
-	  <img src="../static/img/logo2.png" width="300" height="65" alt="oops! There an issue with taking the image on board">
-	  <div>
-      <a class="btn btn-primary"  href="#">Sign In</a>
-	  <a class="btn btn-primary"  href="#">Sign Up</a>
+  
+   <nav class="top-buttons">
+    <!-- <div class="container"> -->
+	  <img class="logo" src="{{url_for('static', filename='img/logo2.png')}}"  width="300" height="65" alt="oops! There an issue with taking the image on board">
+	  <div class="top-buttons">
+      <a   href="{{url_for('signup_form')}}">Sign up</a>
+	  <a  href="{{url_for('login_form')}}">Sign in</a>
 	  </div>
-    </div>
+    <!-- </div> -->
   </nav>
 
   <!-- Masthead -->
   <header class="masthead text-center">
-    <div class="overlay">
-    </div>
     <div class="container">
-      
       <div class="row">
         <div class="col-xl-9 mx-auto">
-          <img id= "mascot" src="../static/img/mascot1.jpeg" alt=""style="width:80%; margin-bottom: auto; margin-left: auto;
+          <img id= "mascot" src="{{url_for('static', filename='img/mascot1.jpeg')}}" alt=""style="width:80%; margin-bottom: auto; margin-left: auto;
           margin-right: auto;">
 
           <h1 class="mb-5 " >OOOPS, looks like you're lost in the air</h1>
           
           <h1 class="mb-5">Our crew is working on it!</h1>
         </div>
-        <div class="col-md-4 mx-auto">
-
-            <button type="submit" class="btn btn-block btn-lg btn-primary">Go Back To Home</button>
+        <div class="col-xl-9 mx-auto">
+          <form action="{{ url_for('home') }}">
+            <button type="submit" class="btn btn-block btn-lg btn-primary">Go Back To Home Page</button>
+            </form>
         </div>
       </div>
     </div>
   </header>
 
-
-
-
-  <!-- Footer -->
-  <footer class="footer bg-light">
+   <!-- Footer -->
+   <footer class="footer bg-light">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+        <div class="col-lg-4 h-100 text-center text-lg-left my-auto">
           <ul class="list-inline mb-2">
             <li class="list-inline-item">
-              <a href="#">About</a>
+              <a href="/about">About</a>
             </li>
             <li class="list-inline-item">&sdot;</li>
             <li class="list-inline-item">
-              <a href="#">Contact</a>
+              <a href="{{url_for('contactUs')}}">Contact</a>
             </li>
             <li class="list-inline-item">&sdot;</li>
             <li class="list-inline-item">
               <a href="#">Terms of Use</a>
             </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
-            </li>
           </ul>
-          <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2019. All Rights Reserved.</p>
+          <p class="text-muted small mb-4 mb-lg-0">&copy; Developed by Team 13.</p>
         </div>
-        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+		<div class="col-lg-4 h-100 text-center text-lg-center my-auto">
+		<div class="scroll-up">
+        <a href="#"><i class="fa fa-angle-double-up"></i></a>
+	    </div>
+        </div>		
+        <div class="col-lg-4 h-100 text-center text-lg-right my-auto">
           <ul class="list-inline mb-0">
             <li class="list-inline-item mr-3">
               <a href="#">
