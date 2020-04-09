@@ -20,11 +20,11 @@ app = Flask(__name__)
 app.secret_key = 'ZoomTravel'
 
 # Enter your database connection details below
-app.config['MYSQL_HOST'] = 'istm631-team13.connnfkhwwoq.us-east-1.rds.amazonaws.com'
-app.config['MYSQL_USER'] = 'team13'
-app.config['MYSQL_PASSWORD'] = 'team132020'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_DB'] = 'team13'
+app.config['MYSQL_HOST'] = 'flaskapp.crmt6c0dobbu.us-east-2.rds.amazonaws.com'
+app.config['MYSQL_USER'] = 'team13'
+app.config['MYSQL_PASSWORD'] = 'team132020'
+app.config['MYSQL_PORT'] = 3306
+app.config['MYSQL_DB'] = 'flaskapp'
 
 # Intialize MySQL
 mysql = MySQL(app)
