@@ -1,107 +1,443 @@
 <!DOCTYPE html>
-<html>
-<title>W3.CSS Template</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <meta charset=utf-8 />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Zoom Travel</title>
+
+  <!-- Bootstrap core CSS -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+  <!-- Custom fonts for this template -->
+  <link rel="stylesheet" type="text/css"
+    href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" />
+  <link rel="stylesheet" type="text/css"
+    href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css')}}" />
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+    type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landing-page.css')}}" />
+  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home-style.css')}}" /> -->
+
+</head>
 <style>
-body {font-family: "Times New Roman", Georgia, Serif;}
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display";
-  letter-spacing: 5px;
+ body {
+  font-family: 'Roboto', sans-serif;
+  color: #2b2fad;
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto',  sans-serif;
+  font-weight: 500;
+}
+
+.font
+{
+  font-size: 18px;
+  font-weight: 500;
+  padding-top: 6px !important;
+}
+
+.custom-button
+{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 15%;
+  padding: 15px;
+  text-align: right;
+}
+
+.custom-buttons li a{
+  color: #fff;
+  border: none;
+  width: 90px;
+  margin: 3px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  background: #007bff;
+  cursor: pointer;
+  /* margin-top: 12px; */
+  text-decoration: none;
+}
+
+.custom-buttons li a:hover {
+  /* background-color: yellow; */
+  color: #ffff !important;
+  box-shadow: 0 0 20px #007bff;
+  background: #007bff !important;
+}
+
+.main-menu ul li a:hover::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.main-menu ul li a.active::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.main-menu ul li a:hover {
+  color: #f7ece0;
+}
+
+footer.footer {
+  padding-top: 4rem;
+  padding-bottom: 4rem;}
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+
+.speech-bubble {
+  /* top: -125px; */
+  width: 20%;
+  top: auto;
+  bottom: 145px;
+  margin-left: 45%;
+	position: relative;
+	background: #ff9f31;
+	border-radius: 0.7em;
+  height: auto;
+  color: #2b2fad;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 13px solid transparent;
+	border-right-color: #ff9f31;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -6.5px;
+	margin-left: -13px;
+}
+
+.speech-bubble p {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+.speech-bubble p:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Table Styles */
+
+.table-wrapper{
+    margin: 10px 70px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+
+
+
+@media (max-width: 767px) {
+
+	.fl-table {
+        display: block;
+        width: 100%;
+    }
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: white;
+        padding: 0 0 10px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+    .fl-table tr td:nth-child(odd) {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;}
+    
+      .speech-bubble {
+      /* top: -125px; */
+      width: 50%;
+      margin-left: 45%;
+      bottom: 70px;
+      top: auto;
+      position: relative;
+      background: #ff9f31;
+      border-radius: 0.7em;
+      height: auto;
+    }
+
+    .speech-bubble p {
+    margin: 0 0 10px;
+    font-size: 15px;
+}
+
+
 }
 </style>
+
 <body>
 
-<!-- Navbar (sit on top) -->
-<div class="w3-top">
-  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
-    <a href="#home" class="w3-bar-item w3-button">Gourmet au Catering</a>
-    <!-- Right-sided navbar links. Hide them on small screens -->
-    <div class="w3-right w3-hide-small">
-      <a href="{{ url_for('profile_form') }}"class="w3-bar-item w3-button">Profile</a>
-      <a href="#menu" class="w3-bar-item w3-button">Menu</a>
-      <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+  <!-- Navigation -->
+
+   <!-- Navigation -->
+   <nav class="navbar navbar-expand-xl navbar-light bg-light" style="background-color: #ffffff;">
+    <img class="navbar-brand logo" src="{{url_for('static', filename='img/logo2.png')}}" width="300" height="65" alt="oops! There an issue with taking the image on board">
+      
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile_menu" aria-controls="mobile_menu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
+      <div class="collapse navbar-collapse" id="mobile_menu">
+        <ul class="navbar-nav ml-auto font ">
+        <li class="nav-item-active"><a class= "nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
+        <li><a class= "nav-link"  href="#">My trips </a></li>
+        <li><a class= "nav-link" href="#">Add trips</a></li>
+        <li><a class = "nav-link" href="#">Past trips</a></li>
+        <li><a class = "nav-link" href="#">Pro-tips</a></li>
+        <ul class="navbar-nav navbar-right">
+          <li><a href="{{url_for('profile_form')}}" class="btn btn-primary" role ="button" style = "margin-right: 10px; margin-bottom: 10px;"><span class="glyphicon glyphicon-user "></span> Profile</a></li>
+          <li><a href="{{url_for('logout')}}" class="btn btn-primary" role ="button" style = "margin-right: 10px; margin-bottom: 10px;"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+         </ul>
+      <!-- </div> -->
     </div>
-  </div>
+    </nav>
+
+
+  
+  <!-- Masthead -->
+  <header class="masthead text-white text-center" style = "padding-top: 20%; padding-bottom: 20%;">
+    <!-- <img id="Flappy" src="img/mascot1.png" alt="Flappy-Mascot" > -->
+
+   <div class="overlay"></div>
+   <div class="speech-bubble">
+    <p><strong><i>Hello,  {{ account }}</strong></i></p>
+    <p><strong><i>Welcome onboard!</strong></i></p>
+    <p><i>You are all set to fly high.</i></p>
 </div>
+   <!-- <div class="container">
+     <div class="row">
+      <div class="speech-bubble">
+        <p><strong>Demo speech bubble</strong></p>
+        <p>This is CSS speech bubble with borders and drop shadow.</p>
+    </div>
+       <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+         <form>
+           <div class="form-row">
+              <div class="col-12 col-md-9 mb-2 mb-md-0">
+               <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+             </div>
+             <div class="col-12 col-md-3">
+               <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+             </div> 
+           </div>
+         </form>
+       </div>
+     </div>
+   </div> -->
+ </header>
 
-<!-- Header -->
-<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
-  <img class="w3-image" src="/w3images/hamburger.jpg" alt="Hamburger Catering" width="1600" height="800">
-  <div class="w3-display-bottomleft w3-padding-large w3-opacity">
-    <h1 class="w3-xxlarge">Le Catering</h1>
-  </div>
-</header>
+  <!-- <div id="main">
+    <div class="table-wrapper">
+      <table class="fl-table">
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
 
-<!-- Page content -->
-<div class="w3-content" style="max-width:1100px">
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Content 1</td>
+            <td>Content 1</td>
 
-  <!-- About Section -->
-  <div class="w3-row w3-padding-64" id="about">
-    <div class="w3-col m6 w3-padding-large w3-hide-small">
-     <img src="/w3images/tablesetting2.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
+          </tr>
+          <tr>
+            <td>Content 2</td>
+            <td>Content 2</td>
+
+          </tr>
+          <tr>
+            <td>Content 3</td>
+            <td>Content 3</td>
+
+          </tr>
+          <tr>
+            <td>Content 4</td>
+            <td>Content 4</td>
+
+          </tr>
+          <tr>
+            <td>Content 5</td>
+            <td>Content 5</td>
+
+          </tr>
+
+        <tbody>
+      </table>
     </div>
 
-    <div class="w3-col m6 w3-padding-large">
-      <h1 class="w3-center">About Catering</h1><br>
-      <h5 class="w3-center">Tradition since 1889</h5>
-      <p class="w3-large">The Catering was founded in blabla by Mr. Smith in lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.We only use <span class="w3-tag w3-light-grey">seasonal</span> ingredients.</p>
-      <p class="w3-large w3-text-grey w3-hide-medium">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-  </div>
+  </div> -->
+
   
-  <hr>
-  
-  <!-- Menu Section -->
-  <div class="w3-row w3-padding-64" id="menu">
-    <div class="w3-col l6 w3-padding-large">
-      <h1 class="w3-center">Our Menu</h1><br>
-      <h4>Bread Basket</h4>
-      <p class="w3-text-grey">Assortment of fresh baked fruit breads and muffins 5.50</p><br>
-    
-      <h4>Honey Almond Granola with Fruits</h4>
-      <p class="w3-text-grey">Natural cereal of honey toasted oats, raisins, almonds and dates 7.00</p><br>
-    
-      <h4>Belgian Waffle</h4>
-      <p class="w3-text-grey">Vanilla flavored batter with malted flour 7.50</p><br>
-    
-      <h4>Scrambled eggs</h4>
-      <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
-    
-      <h4>Blueberry Pancakes</h4>
-      <p class="w3-text-grey">With syrup, butter and lots of berries 8.50</p>    
+  <!-- Footer -->
+  <footer class="footer bg-light" style= "font-size: 16px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 h-100 text-center text-lg-left">
+          <ul class="list-inline mb-2">
+            <li class="list-inline-item">
+              <a href="/about">About</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="{{url_for('contactUs')}}">Contact</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#">Terms of Use</a>
+            </li>
+          </ul>
+          <p class="text-muted small mb-4 mb-lg-0">&copy; Developed by Team 13.</p>
+        </div>
+        <div class="col-lg-4 h-100 text-center text-lg-center my-auto">
+          <div class="scroll-up">
+            <a href="#"><i class="fa fa-angle-double-up"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-4 h-100 text-center text-lg-right my-auto">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item mr-3">
+              <a href="#">
+                <i class="fab fa-facebook fa-2x fa-fw"></i>
+              </a>
+            </li>
+            <li class="list-inline-item mr-3">
+              <a href="#">
+                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-instagram fa-2x fa-fw"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    
-    <div class="w3-col l6 w3-padding-large">
-      <img src="/w3images/tablesetting.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
-    </div>
-  </div>
+  </footer> 
 
-  <hr>
+  <!-- partial -->
+  <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+  <!-- <script src="{{url_for('static', filename='home-script.js')}}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
-  <!-- Contact Section -->
-  <div class="w3-container w3-padding-64" id="contact">
-    <h1>Contact</h1><br>
-    <p>We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste. Do not hesitate to contact us.</p>
-    <p class="w3-text-blue-grey w3-large"><b>Catering Service, 42nd Living St, 43043 New York, NY</b></p>
-    <p>You can also contact us by phone 00553123-2323 or email catering@catering.com, or you can send us a message here:</p>
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16" type="number" placeholder="How many people" required name="People"></p>
-      <p><input class="w3-input w3-padding-16" type="datetime-local" placeholder="Date and time" required name="date" value="2017-11-16T20:00"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
-      <p><button class="w3-button w3-light-grey w3-section" type="submit">SEND MESSAGE</button></p>
-    </form>
-  </div>
-  
-<!-- End page content -->
-</div>
-
-<!-- Footer -->
-<footer class="w3-center w3-light-grey w3-padding-32">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-</footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

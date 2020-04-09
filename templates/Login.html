@@ -12,7 +12,10 @@
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css'>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loginStyle.css')}}" />
   
-  <!-- Bootstrap core CSS -->
+  <!-- Bootstrap core CSS --> <!-- Bootstrap core JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" />
 
   <!-- Custom fonts for this template -->
@@ -20,6 +23,10 @@
    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css')}}" />
    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 </head>
+<style>
+ 
+
+</style>
 <body>
 <div class="main-box">
   <div class="slider-cont">
@@ -36,7 +43,7 @@
       <div class="img-txt">
         <div class="img-layer"></div>
         <!-- <h1>Join US Now!</h1> -->
-        <img src="{{url_for('static', filename='img/join.png')}}"/>
+        <img src="{{url_for('static', filename='img/join.jpg')}}"/>
       </div>
     </div>
   </div>
@@ -94,19 +101,25 @@
 
    <!-- Modal -->
    <div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background-color: #007bff; color: #ffffff;">
           <h5 class="modal-title" id="exampleModalLabel"> {{ msg_type }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true" class="white-text">&times;</span>
           </button>
         </div>
         <div class="modal-body">
+          <div class="row">
+            <div id="modalImg" class="col-5">
+              <img class="{{ class_type }}"/>
+            </div>
+            <div class="col-7" style="font-size: 19px;">
           {{ msg }}
         </div>
+        </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -122,10 +135,11 @@
     debugger;
     try{
     let msg = '{{ msg }}';
+    let class_type = '{{ class_type }}';
     if(msg != '')
       $("#mainModal").modal('show');
+    
     let sType = '{{ sType }}';
-   
     if(sType=="signIn")
     {
       $("#signInBtn").click();

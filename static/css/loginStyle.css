@@ -126,6 +126,16 @@ body{background: #191919; 	width: 100%;  }
   background-color: transparent;
 }
 
+.sadFlappy {
+  content:url("../img/mascot2.png");
+  height: 100px !important;
+}
+
+.happyFlappy {
+  content:url("../img/mascot1.png");
+  height: 100px !important;
+}
+
 /************ Start Form Container **************/
 
 .top-buttons {

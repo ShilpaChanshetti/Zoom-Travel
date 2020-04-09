@@ -11,7 +11,10 @@
     <!-- Custom fonts for this template -->
 
     <!-- Bootstrap core CSS -->
-   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" />
+   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -19,23 +22,112 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css')}}" />
   
    <!-- Custom CSS -->
-   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landing-page2.css')}}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/profilestyle.css')}}">
 </head>
+<style>
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #2b2fad;
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto',  sans-serif;
+  font-weight: 500;
+}
+
+.font
+{
+  font-size: 18px;
+  font-weight: 500;
+  padding-top: 6px !important;
+}
+
+.main-menu ul li a:hover::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.main-menu ul li a.active::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.main-menu ul li a:hover {
+  color: #ff9f31;
+}
+
+footer.footer {
+  padding-top: 4rem;
+  padding-bottom: 4rem;}
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+/* Effect 4: bottom border enlarge */
+.cl-effect-4 a {
+	padding: 0 0 10px;
+}
+
+.cl-effect-4 a::after {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background: #fff;
+	content: '';
+	opacity: 0;
+	-webkit-transition: height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+	-moz-transition: height 0.3s, opacity 0.3s, -moz-transform 0.3s;
+	transition: height 0.3s, opacity 0.3s, transform 0.3s;
+	-webkit-transform: translateY(-10px);
+	-moz-transform: translateY(-10px);
+	transform: translateY(-10px);
+}
+
+.cl-effect-4 a:hover::after,
+.cl-effect-4 a:focus::after {
+	height: 5px;
+	opacity: 1;
+	-webkit-transform: translateY(0px);
+	-moz-transform: translateY(0px);
+	transform: translateY(0px);
+}
+</style>
 <body>
 
  <!-- Navigation -->
-  
- <nav class="top-buttons bg-light">
-  <!-- <div class="container"> -->
-  <img class="logo" src="{{url_for('static', filename='img/logo2.png')}}"  width="300" height="65" alt="oops! There an issue with taking the image on board">
-  <div class="top-buttons">
-    <a   href="{{url_for('home')}}">Home</a>
-  <a  href="{{url_for('login_form')}}">Logout</a>
-  </div>
-  <!-- </div> -->
-</nav>
-
+  <nav class="navbar navbar-expand-xl navbar-light bg-light" style="background-color: #ffffff;">
+    <img class="navbar-brand logo" src="{{url_for('static', filename='img/logo2.png')}}" width="300" height="65" alt="oops! There an issue with taking the image on board">
+      
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile_menu" aria-controls="mobile_menu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
+      <div class="collapse navbar-collapse" id="mobile_menu">
+        <ul class="navbar-nav ml-auto font ">
+        <li class="nav-item-active"><a class= "nav-link" href="{{url_for('home', account=record['name'] )}}">Home <span class="sr-only">(current)</span></a></li>
+        <li><a class= "nav-link"  href="#">My trips </a></li>
+        <li><a class= "nav-link" href="#">Add trips</a></li>
+        <li><a class = "nav-link" href="#">Past trips</a></li>
+        <li><a class = "nav-link" href="#">Pro-tips</a></li>
+        <ul class="navbar-nav navbar-right">
+          <li><a href="{{url_for('profile_form')}}" class="btn btn-primary" role ="button" style = "margin-right: 10px; margin-bottom: 10px;"><span class="glyphicon glyphicon-user "></span> Profile</a></li>
+          <li><a href="{{url_for('logout')}}" class="btn btn-primary" role ="button" style = "margin-right: 10px; margin-bottom: 10px;"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+         </ul>
+      <!-- </div> -->
+    </div>
+    </nav>
 
 <!-- partial:index.partial.html -->
 <!-- <div class="confirm">
@@ -45,23 +137,32 @@
 
  <!-- Modal -->
  <div class="modal fade" id="mainModal1" tabindex="-1" role="dialog" aria-labelledby="mainModal1" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" style="color: black;">
-      <div class="modal-header">
+  <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #FF9F31; color: #ffffff;">
         <h5 class="modal-title" id="exampleModalLabel"> {{ msg_type }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" class="white-text">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <div class="row">
+          <div id="modalImg" class="col-5">
+            <img class="{{ class_type }}"/>
+          </div>
+          <div class="col-7" style="font-size: 19px;">
         {{ msg }}
       </div>
+      </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
+</div>
+
+
 <form action="{{ url_for('profile_submit') }}"  method="post" autocomplete="off">
   <h1>
     Create User Profile
@@ -367,7 +468,7 @@
 
 </form>
 <!-- Footer -->
-<footer class="footer bg-light">
+<footer class="footer bg-light" style="background-color: #ffffff;">
   <div class="container">
     <div class ="row">
       <div class="col-lg-4 h-100 text-center text-lg-left my-auto">
@@ -416,11 +517,15 @@
 
 
 <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-   <!-- Bootstrap core JavaScript -->
-   <script src="{{url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
-   <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script> -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
   <script src="{{url_for('static', filename='profilescript.js')}}"></script>
+  
   <script>
     $(document).ready(function(){
       debugger;
