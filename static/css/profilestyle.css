@@ -10,7 +10,7 @@ fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
+menu, output, ruby, section, summary,
 time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -159,6 +159,17 @@ form {
 .row > div:last-child:after {
   display: none;
 } */
+
+
+.sadFlappy {
+  content:url("../img/mascot2.png");
+  height: 100px !important;
+}
+
+.happyFlappy {
+  content:url("../img/mascot1.png");
+  height: 100px !important;
+}
 
 h1 {
   font-weight: 300;
