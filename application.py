@@ -1,9 +1,9 @@
 # from flask import Flask, render_template
 # import datetime
 # import re
-# app = Flask(__name__)
+# application = Flask(__name__)
 
-# @app.route("/")
+# @application.route("/")
 # def home():
 #     #print('s')
 #     return render_template('index.html')
@@ -14,47 +14,46 @@ from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import datetime
 import re
-app = Flask(__name__)
+application = Flask(__name__)
 
 # Change this to your secret key (can be anything, it's for extra protection)
-app.secret_key = 'ZoomTravel'
+application.secret_key = 'ZoomTravel'
 
 # Enter your database connection details below
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'root'
-app.config['MYSQL_PORT'] = 3307
-app.config['MYSQL_DB'] = 'isd'
+application.config['MYSQL_HOST'] = 'flaskapp.crmt6c0dobbu.us-east-2.rds.amazonaws.com'
+application.config['MYSQL_USER'] = 'team13'
+application.config['MYSQL_PASSWORD'] = 'team132020'
+application.config['MYSQL_PORT'] = 3306
+application.config['MYSQL_DB'] = 'flaskapp'
 
 # Intialize MySQL
-mysql = MySQL(app)
+mysql = MySQL(application)
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('index.html')
-    # return render_template('testing.html')
 
-@app.route('/about')
+@application.route('/about')
 def aboutUs():
     return render_template('about-us.html')
 
-@app.route('/contactUs')
+@application.route('/contactUs')
 def contactUs():
     return render_template('about-us.html', msg="contactUs")
 
-@app.errorhandler(404)
+@application.errorhandler(404)
 def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('error.html'), 404
 
-@app.route('/signin', methods=['GET', 'POST'])
+@application.route('/signin', methods=['GET', 'POST'])
 def login_form():
     if request.method == 'POST':
         return redirect(url_for('index'))
     # show the form, it wasn't submitted
     return render_template('Login.html',sType="signIn")
 
-@app.route('/signup', methods=['GET', 'POST'])
+@application.route('/signup', methods=['GET', 'POST'])
 def signup_form():
     if request.method == 'POST':
         return redirect(url_for('index'))
@@ -63,12 +62,13 @@ def signup_form():
     return render_template('Login.html',sType="signUp")
 
 
-@app.route('/signin/', methods=['GET', 'POST'])
+@application.route('/signin/', methods=['GET', 'POST'])
 def signin_auth():
     # if request.method == 'POST':
     #     return redirect(url_for('index'))
     msg = ''
     msg_type = ''
+    class_type = ''
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         # Create variables for easy access
         email = request.form['email']
@@ -85,28 +85,30 @@ def signin_auth():
             session['id'] = account['email']
             session['email'] = account['email']
             # User is loggedin show them the home page
-            return redirect(url_for('home'))
+            return redirect(url_for('home', account=account['name']))
     
         else:
             # Account doesnt exist or username/password incorrect
-            msg = 'Incorrect username/password!'
+            msg = 'Hmmm, the information you entered does not match our records. Please try again!'
             msg_type = 'Error'
-    
-    return render_template('Login.html', msg=msg, msg_type=msg_type,sType="signIn")
+            class_type = 'sadFlappy'
+    return render_template('Login.html', msg=msg, msg_type=msg_type,sType="signIn", class_type=class_type)
 
-@app.route('/signin/home')
+@application.route('/signin/home')
 def home():
     # Check if user is loggedin
     if 'loggedin' in session:
         # User is loggedin show them the home page
-        return render_template('home.html')
+        print(request.args.get('account'))
+        return render_template('home.html', account=request.args.get('account'))
     # User is not loggedin redirect to index page
     return redirect(url_for('index'))
 
-@app.route('/signup/', methods=['GET', 'POST'])
+@application.route('/signup/', methods=['GET', 'POST'])
 def signup_save():
     msg = ''
     msg_type = ''
+    class_type = ''
     # Check if "username", "password" and "email" POST requests exist (user submitted form)
     if request.method == 'POST' and 'name' in request.form and 'password' in request.form and 'email' in request.form:
         name = request.form['name']
@@ -116,27 +118,32 @@ def signup_save():
         cursor.execute('SELECT * FROM traveler_record WHERE email = %s', (email,))
         account = cursor.fetchone()
         if account:
-            msg = 'Account already exists!'
+            msg = 'Hmm, I think you already are a Zoomer. Please try logging in again!! '
             msg_type = 'Error'
+            class_type = 'sadFlappy'
         elif not name or not password or not email:
-            msg = 'Please fill out the form!'
+            msg = 'Looks like the sky is empty! Please fill out the form!'
             msg_type = 'Error'
-        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            msg = 'Invalid email address!'
-            msg_type = 'Error'
+            class_type = 'sadFlappy'
+        # elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+        #     msg = 'Hmmm, I see that you are entering the wrong email address. Could you try changing it and try once again'
+        #     msg_type = 'Error'
+        #     class_type = 'sadFlappy'
         else:
             cursor.execute('INSERT INTO traveler_record (name, email, password) VALUES (%s, %s, %s)', (name, email, password,))
             mysql.connection.commit()
-            msg = 'You have successfully registered!'
+            msg = 'Yippe!! You just subscribed for an easy travel. You are all set to fly high'
             msg_type = 'Success'
+            class_type = 'happyFlappy'
     elif request.method == 'POST':
         # Form is empty... (no POST data)
         msg = 'Please fill out the form!'
         msg_type = 'Error'
+        class_type = 'sadFlappy'
     # Show registration form with message (if any)
-    return render_template('Login.html', msg=msg, msg_type=msg_type)
+    return render_template('Login.html', msg=msg, msg_type=msg_type, class_type=class_type)
 
-@app.route('/profile', methods=['GET', 'POST'])
+@application.route('/profile', methods=['GET', 'POST'])
 def profile_form():
     if 'loggedin' in session:
     # We need all the account info for the user so we can display it on the profile page
@@ -148,10 +155,11 @@ def profile_form():
     # User is not loggedin redirect to login page
     return redirect(url_for('login_form'))
 
-@app.route('/profile/', methods=['GET', 'POST'])
+@application.route('/profile/', methods=['GET', 'POST'])
 def profile_submit():
     msg = ''
     msg_type = ''
+    class_type = ''
     if request.method == 'POST' and 'name' in request.form  and 'email' in request.form and 'dob' in request.form and 'gender' in request.form and 'passport' in request.form and 'country' in request.form:
         #defined variables
         name = request.form['name']
@@ -168,18 +176,28 @@ def profile_submit():
         mysql.connection.commit()
         msg = 'Profile Updated!'
         msg_type = 'Success'
+        class_type = 'happyFlappy'
     elif request.method == 'POST':
         # Form is empty... (no POST data)
         msg = 'Please fill out the form!'
         msg_type = 'Error'
+        class_type = 'sadFlappy'
     # Show registration form with message (if any)
     
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM traveler_record WHERE email = %s', (session['id'],))
     record = cursor.fetchone()
     # Show the profile page with account info
-    return render_template('profile.html', record=record, msg=msg, msg_type=msg_type)
+    return render_template('profile.html', record=record, msg=msg, msg_type=msg_type, class_type=class_type)
+
+@application.route('/logout')
+def logout():
+    # Remove session data, this will log the user out
+   session.pop('loggedin', None)
+   session.pop('id', None)
+   session.pop('email', None)
+   # Redirect to index page
+   return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run()
-
+    application.run()
