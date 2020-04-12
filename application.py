@@ -33,6 +33,62 @@ mysql = MySQL(application)
 def index():
     return render_template('index.html')
 
+@application.route('/signin/protips', methods=['GET', 'POST'])
+def protips():
+    if 'loggedin' in session:
+        return render_template('protips.html')
+    # User is not loggedin redirect to login page
+    return redirect(url_for('login_form'))
+
+@application.route('/signin/addTrips/', methods=['GET', 'POST'])
+def addTrips():
+    if 'loggedin' in session:
+    # We need all the account info for the user so we can display it on the profile page
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute("SELECT * FROM flights")
+        records = cursor.fetchall()
+        # Show the profile page with account info
+        return render_template('addTrips.html', len = len(records), records = records)
+    # User is not loggedin redirect to login page
+    return redirect(url_for('login_form'))
+
+@application.route('/signin/addTrips/', methods=['GET', 'POST'])
+def trips_submit():
+    msg = ''
+    msg_type = ''
+    class_type = ''
+    if request.method == 'POST' and 'typeoftravel' in request.form  and 'fligtno' in request.form and 'origin' in request.form and 'destination' in request.form and 'doj' in request.form and 'toj' in request.form:
+        #defined variables
+        typeoftravel = request.form['typeoftravel']
+        fligtno = request.form['fligtno']
+        origin = request.form['origin']
+        destination = request.form['destination']
+        doj = datetime.datetime.strptime(doj, "%Y-%m-%d")
+        gender = request.form['gender']
+        passport = request.form['passport']
+        country = request.form['country']
+       
+        #connection to Database
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('UPDATE traveler_record SET name = %s, gender = %s, DOB = %s, passport_num = %s, country_of_res = %s where email = %s', (name,gender,formatted_date,passport,country,email,))
+        mysql.connection.commit()
+        msg = 'Profile Updated!'
+        msg_type = 'Success'
+        class_type = 'happyFlappy'
+    elif request.method == 'POST':
+        # Form is empty... (no POST data)
+        msg = 'Please fill out the form!'
+        msg_type = 'Error'
+        class_type = 'sadFlappy'
+    # Show registration form with message (if any)
+    
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM traveler_record WHERE email = %s', (session['id'],))
+    record = cursor.fetchone()
+    # Show the profile page with account info
+    return render_template('trips.html', record=record)
+
+
 @application.route('/about')
 def aboutUs():
     return render_template('about-us.html')

@@ -1,13 +1,8 @@
 (function($){
 	function floatLabel(inputType){
 		$(inputType).each(function(){
-      debugger;
 			var input = $(this).find("input, select, textarea");
       var label = $(this).find("label");
-      if(input.val() != '' && input.val() != null)
-			{
-				input.next().addClass("active");
-			}
 			// on focus add cladd active to label
 			input.focus(function(){
 				input.next().addClass("active");
@@ -19,8 +14,6 @@
 					label.removeClass();
 				}
 			});
-			
-			
 		});
 	}
 	// just add a class of "floatLabel to any group you want to have the float label interactivity"
@@ -29,7 +22,7 @@
   
 //////  Just a bunch of fluff for other interactions  ////////////////////////////////////////////////////////  
   
-/*   //for the pw field - toggle visibility
+  //for the pw field - toggle visibility
   $(".eye").on("click" , function(){
     var $this = $(this);
     if( !$this.is(".show") ){
@@ -43,24 +36,23 @@
            .removeClass("fa-eye")
            .next().attr("type" , "password");
     }
-  }); */
+  });
   
   //modal close
   $(".close").on("click" , function(){
     $(this).parent().removeClass("show");
-   // $("#clear").click();
-    //floatLabel(".float-label");
+    $("#clear").click();
   })
   
   //submit button dirty validation ^-^
-  //  $("button[type='submit']").on("click" , function(){
-  //    if( !$("input, select, textarea").val() ){ 
-  //      $(this).text("Please enter all Fields");
-  //    }else{
-  //     $(".confirm").addClass("show");
-  //    }
-  //    return false;
-  //  })
+  $("button[type='submit']").on("click" , function(){
+    if( !$("input, select, textarea").val() ){ 
+      $(this).text("Please enter all Fields");
+    }else{
+      $(".confirm").addClass("show");
+    }
+    return false;
+  })
   //just for reset button
   $("#clear").on("click" , function(){
     $(".active").removeClass("active");
