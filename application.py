@@ -366,7 +366,7 @@ def trip_submit():
         else:
             cursor.execute('INSERT INTO itinerary (type_of_travel, personal_item_allw, checked_bag_allw, is_id, is_checkin_counter, is_customs, is_immigration, is_security, is_head_to_gate, is_personal_item, is_checked_bag, customer_id, flight_num, TripDate) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (typeOfTravel,personal_allw,checked_allw,'F','F','F','F','F','F','F','F',customerId,flightno,formatted_date,))
             mysql.connection.commit()
-            msg = 'Yay! Your trip added'
+            msg = 'Yay! Your trip is sucessfully added'
             msg_type = 'Success'
             class_type = 'happyFlappy'
     elif request.method == 'POST':
@@ -494,5 +494,5 @@ def logout():
    return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    
+
     application.run()
