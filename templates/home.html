@@ -6,6 +6,7 @@
   <title>Home</title>
   <meta charset=utf-8 />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel='icon' href='/static/img/favicon.ico' type='image/x-icon' />
 
   <title>Zoom Travel</title>
 
@@ -306,9 +307,9 @@ footer.footer {
       <div class="collapse navbar-collapse" id="mobile_menu">
         <ul class="navbar-nav ml-auto font ">
         <li class="nav-item-active"><a class= "nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
-        <li><a class= "nav-link"  href="#">My trips </a></li>
-        <li><a class= "nav-link" href="addTrips">Add trips</a></li>
-        <li><a class = "nav-link" href="#">Past trips</a></li>
+        <li><a class= "nav-link"  href="{{url_for('upcomingTrips')}}">Upcoming trips </a></li>
+        <li><a class= "nav-link" href="{{url_for('addTrips')}}">Add trips</a></li>
+        <li><a class = "nav-link" href="{{url_for('pastTrips')}}">Past trips</a></li>
         <li><a class = "nav-link" href="protips">Pro-tips</a></li>
         <ul class="navbar-nav navbar-right">
           <li><a href="{{url_for('profile_form')}}" class="btn btn-primary" role ="button" style = "margin-right: 10px; margin-bottom: 10px;"><span class="glyphicon glyphicon-user "></span> Profile</a></li>
@@ -409,10 +410,6 @@ footer.footer {
             <li class="list-inline-item">&sdot;</li>
             <li class="list-inline-item">
               <a href="{{url_for('contactUs')}}">Contact</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
             </li>
           </ul>
           <p class="text-muted small mb-4 mb-lg-0">&copy; Developed by Team 13.</p>

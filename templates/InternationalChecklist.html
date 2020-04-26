@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel='icon' href='/static/img/favicon.ico' type='image/x-icon' />
+
+
+	<title>Zoom Travel</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!-- Custom fonts for this template -->
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" />
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css')}}" />
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,300italic,400italic,700italic"
+		rel="stylesheet" type="text/css">
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/checkliststyle.css')}}" />
+
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-xl navbar-light bg-light" style="background-color: #ffffff;">
+		<img class="navbar-brand logo" src="{{url_for('static', filename='img/logo2.png')}}" width="300" height="65"
+			alt="oops! There an issue with taking the image on board">
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile_menu"
+			aria-controls="mobile_menu" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="mobile_menu">
+			<ul class="navbar-nav ml-auto font ">
+				<li class="nav-item-active"><a class="nav-link" href="{{url_for('home', account=record['name'] )}}">Home
+					</a></li>
+				<li><a class="nav-link" href="{{url_for('upcomingTrips')}}">Upcoming trips </a></li>
+				<li><a class="nav-link" href="{{url_for('addTrips')}}">Add trips</a></li>
+				<li><a class="nav-link" href="{{url_for('pastTrips')}}">Past trips</a></li>
+				<li><a class="nav-link" href="protips">Pro-tips</a></li>
+				<ul class="navbar-nav navbar-right">
+					<li><a href="{{url_for('profile_form')}}" class="btn btn-primary" role="button"
+							style="margin-right: 10px; margin-bottom: 10px;"><span
+								class="glyphicon glyphicon-user "></span> Profile</a></li>
+					<li><a href="{{url_for('logout')}}" class="btn btn-primary" role="button"
+							style="margin-right: 10px; margin-bottom: 10px;"><span
+								class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				</ul>
+			</ul>
+			<!-- </div> -->
+		</div>
+	</nav>
+
+	<!-- Modal -->
+	<div class="modal fade" id="mainModalIC" tabindex="-1" role="dialog" aria-labelledby="mainModalIC"
+		aria-hidden="true">
+		<div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #FF9F31; color: #ffffff;">
+					<h5 class="modal-title" id="exampleModalLabel"> Uh oh!</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true" class="white-text">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div id="modalImg" class="col-5">
+							<img class="sadFlappy" />
+						</div>
+						<div class="col-7" style="font-size: 19px;">
+							<p>There are some incomplete checklist items. Please fill the mandatory items to proceed.</p>
+							<span id="IncompleteCheck"> </span>
+						</div>
+					</div>
+					<!-- <div class="modal-footer">
+						<form action="{{ url_for('checklist_submit', itineraryId=itineraryId) }}" method="post">
+						<button type="submit" class="btn btn-primary">Proceed Anyway</button>
+						</form>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div> -->
+					<div class="modal-footer">
+						<!-- <button onclick="submitModal()" id="submitModalID" class="btn btn-primary">Proceed Anyway</button> -->
+						<button type="button"  class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="p-3 text-center text-white">
+		<div class="head">
+			<h3><b>Travel Checklist - International</b></h3>
+			<div class="subtitle"></div>
+		</div>
+	</div>
+
+	<div class="container h-100">
+		<div class="row h-100 justify-content-center align-items-center">
+			<form action="{{ url_for('checklist_submit', travelType=travelType, itineraryId=itineraryId) }}" method="post" id='formID1' >
+				<!-- <form> -->
+				<div class="list">
+					<ul>
+						<li>
+							<input type="checkbox" id="item-1" name="item-1" />
+							<label for="item-1" class="text">Web check-in &amp; collect your boarding pass</label>
+							<label for="item-1" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-2" name="item-2" />
+							<label for="item-2" class="text">Keep all the important documents in your personal
+								bag</label>
+							<label for="item-2" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-3" name="item-3" />
+							<label for="item-3" class="text">Arrive on the airport at least 3 hours before
+								departure</label>
+							<label for="item-3" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-4" name="item-4" />
+							<label for="item-4" class="text">Locate your Airline Desk<sup class = "text-danger">*</sup></label>
+							<label for="item-4" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-5" name="item-5"/>
+							<label for="item-5" class="text">Collect boarding pass<sup class = "text-danger">*</sup></label>
+							<label for="item-5" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-6" name="item-6" />
+							<label for="item-6" class="text">Check the weight and size of the personal bag(s)</label>
+							<label for="item-6" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-7" name="item-7" />
+							<label for="item-7" class="text">Check-in your luggage</label>
+							<label for="item-7" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+
+						<li>
+							<input type="checkbox" id="item-8" name="item-8" />
+							<label for="item-8" class="text">Head towards Immigration<sup class = "text-danger">*</sup></label>
+							<label for="item-8" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-9" name="item-9"/>
+							<label for="item-9" class="text">The officer will ask you to look into the camera for taking
+								your picture. Smile! 😊 <sup class = "text-danger">*</sup></label>
+							<label for="item-9" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-10" name="item-10"/>
+							<label for="item-10" class="text">Head towards Security Check - Keep your boarding pass and
+								passport ready!<sup class = "text-danger">*</sup></label>
+							<label for="item-10" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-11" name="item-11" />
+							<label for="item-11" class="text">Head towards your boarding gate (Printed on your boarding
+								pass)<sup class = "text-danger">*</sup></label>
+							<label for="item-11" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-12" name="item-12" />
+							<label for="item-12" class="text">Get in the correct line depending on your seating class –
+								Business/Economy/Premium Economy<sup class = "text-danger">*</sup></label>
+							<label for="item-12" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<li>
+							<input type="checkbox" id="item-13" name="item-13" />
+							<label for="item-13" class="text">Enter the Flight and locate your seat (Printed on your
+								boarding pass)<sup class = "text-danger">*</sup></label>
+							<label for="item-13" class="button"></label>
+							<svg width="15px" height="10px" class="checkmark">
+								<polyline points="1,5 6,9 14,1" />
+							</svg>
+						</li>
+						<!-- <li>
+				<input type="checkbox" id="item-13" name="item-13" />
+				<label for="item-13" class="text">You are ready to Fly!</label>
+				<label for="item-13" class="button"></label>
+				<svg width="15px" height="10px" class="checkmark">
+					<polyline points="1,5 6,9 14,1" />
+				</svg>
+			</li> -->
+
+					</ul>
+				</div>
+				<!-- <div class= "p-3 text-center">
+		<input type="button"
+               class="btn-s btn-rounded  text-center"
+			   onclick="abc()"
+               value="All set to fly!"/>
+		</div> -->
+				<!-- <input type="hidden" name="travelType" id="travelType"  value="{{ travelType}}"/>
+				<input type="hidden" name="itineraryId" id="itineraryId"  value="{{ itineraryId}}"/> -->
+
+				<div class="p-3 text-center">
+					<input type="submit" class="btn-s btn-rounded  text-center" value="All set to fly!" />
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="p-3 mb-5">
+	</div>
+	<!-- partial -->
+	<!-- Footer -->
+	<footer class="footer bg-light" style="font-size: 16px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 h-100 text-center text-lg-left">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item">
+							<a href="/about">About</a>
+						</li>
+						<li class="list-inline-item">&sdot;</li>
+						<li class="list-inline-item">
+							<a href="{{url_for('contactUs')}}">Contact</a>
+						</li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; Developed by Team 13.</p>
+				</div>
+				<div class="col-lg-4 h-100 text-center text-lg-center my-auto">
+					<div class="scroll-up">
+						<a href="#"><i class="fa fa-angle-double-up"></i></a>
+					</div>
+				</div>
+				<div class="col-lg-4 h-100 text-center text-lg-right my-auto">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item mr-3">
+							<a href="#">
+								<i class="fab fa-facebook fa-2x fa-fw"></i>
+							</a>
+						</li>
+						<li class="list-inline-item mr-3">
+							<a href="#">
+								<i class="fab fa-twitter-square fa-2x fa-fw"></i>
+							</a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#">
+								<i class="fab fa-instagram fa-2x fa-fw"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+	var modalOpen=false;
+		function abc() {
+			//alert(1);
+			str = "";
+			unFilledCount=0
+
+			$(".list ul li").each(function () {
+				debugger;
+				if ($(this).find('label').text().indexOf('*')!=-1 && !$(this).find('input[type="checkbox"]').is(':checked')) {
+					//alert(45);
+					str = str + '- ' + $(this).find('label.text').text() + "\n"
+					//return false;
+					unFilledCount++;
+				}
+			})
+			alert(str);
+
+			try {
+				//if (str != '')
+				if (unFilledCount > 0){
+					$("#mainModalIC").modal('show');
+				}
+			} catch (e) {
+				console.log(e);
+			}
+		}
+
+
+		$("#formID1").submit(function (event) {
+			//alert("Handler for .submit() called.");
+
+			str = "";
+			unFilledCount=0;
+
+			$(".list ul li").each(function () {
+				debugger;
+				// if (!$(this).find('input[type="checkbox"]').is(':checked')) {
+				// 	str = str + '- ' + $(this).find('label.text').text() + "\n";
+				// 	unFilledCount++;
+
+				// }
+
+				if ($(this).find('label').text().indexOf('*')!=-1 && !$(this).find('input[type="checkbox"]').is(':checked')) {
+					//alert(45);
+					str = str + '- ' + $(this).find('label.text').text() + "\n";
+					//return false;
+					unFilledCount++;
+				}
+			})
+			if (unFilledCount > 0){
+					$("#mainModalIC").modal('show');
+					event.preventDefault();
+					//$('#submitModalID').hide();
+					
+				}
+
+			// if (str != '' && !modalOpen) {
+			// 	$("#mainModalIC").modal('show');
+			// 	//$('#submitModalID').hide();
+			// 	modalOpen=true;
+			// 	event.preventDefault();
+			// }
+
+		});
+
+		function submitModal()
+		{
+			$("#formID1").submit();
+		}
+	</script>
+
+</body>
+
+</html>

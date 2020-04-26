@@ -1,0 +1,204 @@
+/* @import url(https://fonts.googleapis.com/css?family=Open+Sans:600,400); */
+
+
+ body {
+  font-family: 'Roboto', sans-serif;
+  color: #2b2fad;
+  width: 100%;
+  background: linear-gradient(360deg, #38aecc, #347fb9) !important;
+}
+
+.list {
+
+  background: #FFFFFF;
+  box-shadow: 4px 8px 12px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 2.25em; 
+
+}
+.list .head {
+  padding: 20px 0;
+  margin: 0 30px;
+  border-bottom: 1px solid #D4DCE0;
+}
+.list .title {
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+}
+.list .subtitle {
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  font-weight: bold;
+}
+.list ul {
+  list-style: none;
+  padding: 4px 0;
+  margin: 0 30px;
+}
+.list ul li {
+  /* position: relative;  G*/
+  display: block;
+  margin: 24px 0;
+  /* height: 20px; G*/
+  height: 25px;
+  /* line-height: 2.25rem; */
+  line-height: normal;
+  
+}
+.list ul .text {
+  float: left;
+  font-size: 15px;
+      font-weight: 500;
+  cursor: pointer;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+.list ul .button {
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+  float: right; 
+  /* right: 0; G*/
+  /* right: 230px; */
+  width: 14px;
+  height: 14px;
+  border: 1px solid #497081;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: all .4s ease-out .5s;
+  transition: all .4s ease-out .5s;
+  margin-top: 3px;
+}
+/* .list ul .checkmark {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  stroke: #C8D4D9;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-dasharray: 30 30;
+  stroke-dashoffset: 30;
+  -webkit-transition: all .5s ease-out;
+  transition: all .5s ease-out;
+} */
+
+.list ul .checkmark {
+  position: relative;
+  /* top: 2px; */
+  float: right; 
+  right: -14px;
+  stroke: #4bb543;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-dasharray: 30 30;
+  stroke-dashoffset: 30;
+  -webkit-transition: all .5s ease-out;
+  transition: all .5s ease-out;
+}
+.list ul input {
+  display: none;
+}
+.list ul input:checked ~ .text {
+  color: #4bb543;
+}
+.list ul input:checked ~ .button {
+  -webkit-transition: all .4s ease-in;
+  transition: all .4s ease-in;
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+  opacity: 0;
+}
+.list ul input:checked ~ .checkmark {
+  stroke-dashoffset: 0;
+  -webkit-transition: all .5s ease-out .4s;
+  transition: all .5s ease-out .4s;
+}
+
+footer {
+	
+text-align: center;
+	background-color: #1a1e23;
+	color: #ffffff;
+	bottom:0;
+	padding: 15px 0;
+
+}
+footer.footer {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+
+}
+.blue-text {
+    color: #2b2fad;
+  }
+
+
+  .btn-rounded {
+    border-radius: 2.25rem !important
+  }
+
+  
+
+.btn-s {
+  font-family: 'Roboto', sans-serif;
+  border: none;
+  width: 50%;
+  padding: 15px;
+  background-color: #f2a041;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.btn-s:hover, .btn-s:focus {
+  color: #FFf;
+  outline: none;
+}
+
+.sadFlappy {
+  content:url("/static/img/mascot2.png");
+  height: 100px !important;
+}
+
+
+@media (max-width: 1000px) {
+.list ul .button {
+  position: absolute;
+  z-index: 2;
+  box-sizing: border-box;
+  /* float: right; G*/
+  /* right: 0; G*/
+  right: 8%;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #497081;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: all .4s ease-out .5s;
+  transition: all .4s ease-out .5s;
+  margin-top: 5px;
+}
+
+.list ul .checkmark {
+  position: absolute;
+  /* float: right;  */
+  right: 8%;
+  stroke: #4bb543;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-dasharray: 30 30;
+  stroke-dashoffset: 30;
+  -webkit-transition: all .5s ease-out;
+  transition: all .5s ease-out;
+}
+
+}

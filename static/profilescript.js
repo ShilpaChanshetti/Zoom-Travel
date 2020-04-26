@@ -3,6 +3,10 @@
 		$(inputType).each(function(){
 			var input = $(this).find("input, select, textarea");
       var label = $(this).find("label");
+      if(input.val() != '' && input.val() != null)
+			{
+				input.next().addClass("active");
+			}
 			// on focus add cladd active to label
 			input.focus(function(){
 				input.next().addClass("active");
@@ -45,14 +49,14 @@
   })
   
   //submit button dirty validation ^-^
-  $("button[type='submit']").on("click" , function(){
-    if( !$("input, select, textarea").val() ){ 
-      $(this).text("Please enter all Fields");
-    }else{
-      $(".confirm").addClass("show");
-    }
-    return false;
-  })
+  // $("button[type='submit']").on("click" , function(){
+  //   if( !$("input, select, textarea").val() ){ 
+  //     $(this).text("Please enter all Fields");
+  //   }else{
+  //     $(".confirm").addClass("show");
+  //   }
+  //   return false;
+  // })
   //just for reset button
   $("#clear").on("click" , function(){
     $(".active").removeClass("active");

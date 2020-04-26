@@ -1,1 +1,218 @@
-<h1>protips</h1>
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='icon' href='/static/img/favicon.ico' type='image/x-icon' />
+
+  <title>Zoom Travel</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!-- Custom fonts for this template -->
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" />
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css')}}" />
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,300italic,400italic,700italic"
+		rel="stylesheet" type="text/css">
+
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css'>
+<!-- Custom styles for this template -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/protipsStyle.css')}}" />
+
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-xl navbar-light bg-light" style="background-color: #ffffff;">
+  <img class="navbar-brand logo" src="{{url_for('static', filename='img/logo2.png')}}" width="300" height="65"
+    alt="oops! There an issue with taking the image on board">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile_menu"
+    aria-controls="mobile_menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="mobile_menu">
+    <ul class="navbar-nav ml-auto font ">
+      <li class="nav-item-active"><a class="nav-link" href="{{url_for('home', account=record['name'] )}}">Home
+        </a></li>
+      <li><a class="nav-link" href="{{url_for('upcomingTrips')}}">Upcoming trips </a></li>
+      <li><a class="nav-link" href="{{url_for('addTrips')}}">Add trips</a></li>
+      <li><a class="nav-link" href="{{url_for('pastTrips')}}">Past trips</a></li>
+      <li><a class="nav-link" href="#">Pro-tips</a></li>
+      <ul class="navbar-nav navbar-right">
+        <li><a href="{{url_for('profile_form')}}" class="btn btn-primary" role="button"
+            style="margin-right: 10px; margin-bottom: 10px;"><span
+              class="glyphicon glyphicon-user "></span> Profile</a></li>
+        <li><a href="{{url_for('logout')}}" class="btn btn-primary" role="button"
+            style="margin-right: 10px; margin-bottom: 10px;"><span
+              class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+    </ul>
+    <!-- </div> -->
+  </div>
+</nav>
+
+<div class="p-5 text-center">
+</div>
+
+
+<!-- partial:index.partial.html -->
+<div class="container h-100">
+<div class="row h-100 justify-content-center align-items-center">
+<div class="blog-slider">
+  <div class="blog-slider__wrp swiper-wrapper">
+    
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        <img src="https://thewirecutter.com/wp-content/uploads/2016/10/composite-fit-carry-on-luggage-630.jpg" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <div class="blog-slider__title">​​CARRY ON LUGGAGE</div>
+        <div class="blog-slider__text"> Don't go by your luggage manufacturer's advertised dimensions. Some manufacturers will not include the wheels or handles in their product listings. Airlines do take these into account.</div>
+      </div>
+    </div>
+    
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        <img src="https://static.saint-pauldevence.com/wp-content/uploads/2017/08/parking-1-1600x900.jpg" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <div class="blog-slider__title">PARKING</div>
+        <div class="blog-slider__text">​If using an iPhone, drop a pin on the location for where you've parked your car and save it. Otherwise, make a note on your phone on the section, lot number, etc. of where your car is parked. This will make it much easier to find once you get back.</div>
+      </div>
+    </div>
+    
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        <img src="https://flyfright.com/wp-content/uploads/2020/01/Chicago-O-Hare-Security-TSA-Scanner-2.jpg" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <div class="blog-slider__title">SCREENING PROCESS</div>
+        <div class="blog-slider__text">The body scanner is a very sensitive machine. Something so much as your boarding pass or a stick of gum can show up on the screen.
+          <P>Keep in mind this machine will not show any images of what is underneath your clothing - only if a foreign object appears on the outline of your body.</P></div>
+      </div>
+    </div>
+
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        
+        <img src="https://1.bp.blogspot.com/-k8Pz9tuin4Y/W9dz7BJ_2gI/AAAAAAAAANs/hheTFH7uxVAF1Pry4mq8FSMVj9TykZAPgCLcBGAs/s1600/redeye3.jpg" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <div class="blog-slider__title">​RED-EYE FLIGHTS</div>
+        <div class="blog-slider__text">You might see a "+1" on some flights, or see flights that fly overnight. These are referred to as "red-eye flights." Any flight that travels through the night is a red-eye.
+        </br> 
+        <p>The downside is obvious; however, these flights are typically cheaper if you can deal with not sleeping well. </p></div>
+      </div>
+    </div>
+    
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        <img src="https://airsafe.com/pix/batteries.jpg" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <div class="blog-slider__title">REMOVE BATTERIES</div>
+        <div class="blog-slider__text">Due to fears of onboard fires, airlines have instituted smart luggage battery bans since January 2018. If your bag has a battery pack, be prepared to show that it is removable in case your bag has to be gate-checked.</div>
+      </div>
+    </div>
+
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk7UXUMsuH_jg8VwxCIw29ou0RN-SQAaSNcJkBXkVqzTtnnqZH&s" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <div class="blog-slider__title">JET LAG</div>
+        <div class="blog-slider__text">Flying across multiple time zones? 
+          Use an app like Entrain or Timeshifter before you fly. 
+          Both help you gradually shift your pre-travel schedule toward your destination time zone based on your specific plans and preferences so that by the time you fly, you’re already ahead of Jet Lag.</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="blog-slider__pagination"></div>
+</div>
+</div>
+</div>
+
+<div class="p-5 text-center">
+</div>
+
+<!-- Footer -->
+<footer class="footer bg-light" style="font-size: 16px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 h-100 text-center text-lg-left">
+        <ul class="list-inline mb-2">
+          <li class="list-inline-item">
+            <a href="/about">About</a>
+          </li>
+          <li class="list-inline-item">&sdot;</li>
+          <li class="list-inline-item">
+            <a href="{{url_for('contactUs')}}">Contact</a>
+          </li>
+        </ul>
+        <p class="text-muted small mb-4 mb-lg-0">&copy; Developed by Team 13.</p>
+      </div>
+      <div class="col-lg-4 h-100 text-center text-lg-center my-auto">
+        <div class="scroll-up">
+          <a href="#"><i class="fa fa-angle-double-up"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-4 h-100 text-center text-lg-right my-auto">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item mr-3">
+            <a href="#">
+              <i class="fab fa-facebook fa-2x fa-fw"></i>
+            </a>
+          </li>
+          <li class="list-inline-item mr-3">
+            <a href="#">
+              <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">
+              <i class="fab fa-instagram fa-2x fa-fw"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js'></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+<script>
+var swiper = new Swiper('.blog-slider', {
+      spaceBetween: 30,
+      effect: 'fade',
+      loop: true,
+      mousewheel: {
+        invert: false,
+      },
+      // autoHeight: true,
+      pagination: {
+        el: '.blog-slider__pagination',
+        clickable: true,
+      }
+    });
+
+</script>
+
+</body>
+</html>

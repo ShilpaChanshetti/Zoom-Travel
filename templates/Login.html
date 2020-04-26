@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <link rel='icon' href='/static/img/favicon.ico' type='image/x-icon' />
   
   <title>Login/Signup Form With Slider</title>
   
@@ -38,12 +39,12 @@
       <div class="img-txt">
         <div class="img-layer"></div>
         <!--<h1>Plan everything in advance.</h1> -->
-        <img src="{{url_for('static', filename='img/img2.jpg')}}"/>
+        <img src="{{url_for('static', filename='img/img2.jpg')}}" style="width: 100%;"/>
       </div>
       <div class="img-txt">
         <div class="img-layer"></div>
         <!-- <h1>Join US Now!</h1> -->
-        <img src="{{url_for('static', filename='img/join.jpg')}}"/>
+        <img src="{{url_for('static', filename='img/join.jpg')}}" style="width: 100%;"/>
       </div>
     </div>
   </div>
@@ -71,14 +72,9 @@
         <label><b>PASSWORD</b></label>
         <input type="password" name="password" placeholder="Your password">
 
-        <p class="terms">
-          <input type="checkbox">
-          I agree all statments in 
-          <a href="#" class="lined-link">terms of service</a>
-        </p>
-        <input type="submit" class="form-btn" value="sign up"/>
+        <input type="submit" class="form-btn" value="Sign Up"/>
      
-        <a href="#" class="lined-link to-signin-link">I'm already member</a>
+        <a href="" class="lined-link to-signin-link">I'm already member</a>
       </form>
     </div>
 
@@ -91,8 +87,6 @@
         <input type="submit"
                class="form-btn"
                value="Sign In"/>
-               
-        <a href="#" class="lined-link to-signup-link">Create new account</a>
       </form>
     </div>
   </div>
