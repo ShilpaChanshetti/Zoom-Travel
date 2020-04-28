@@ -16,10 +16,10 @@ import datetime
 import re
 application = Flask(__name__)
 
-# Change this to your secret key (can be anything, it's for extra protection)
+# Secret Key
 application.secret_key = 'ZoomTravel'
 
-# Enter your database connection details below
+# Database connection details below
 application.config['MYSQL_HOST'] = 'flaskapp.crmt6c0dobbu.us-east-2.rds.amazonaws.com'
 application.config['MYSQL_USER'] = 'team13'
 application.config['MYSQL_PASSWORD'] = 'team132020'
@@ -43,45 +43,55 @@ def protips():
     # User is not loggedin redirect to login page
     return redirect(url_for('login_form'))
 
-
+#aboutUs route
 @application.route('/about')
 def aboutUs():
     return render_template('about-us.html')
 
+#contactUs route
 @application.route('/contactUs')
 def contactUs():
     return render_template('about-us.html', msg="contactUs")
 
+#404 error route
 @application.errorhandler(404)
 def page_not_found(e):
-    # note that we set the 404 status explicitly
-    return render_template('error.html'), 404
+    if 'loggedin' in session:
+        print(session['id'])
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM traveler_record WHERE email = %s', (session['id'],))
+        record = cursor.fetchone()
+        # Show the profile page with account info
+        return render_template('error.html', record=record), 404
+    #expliciting setting 404 
+    return render_template('error.html', record=None), 404
 
 @application.route('/signin', methods=['GET', 'POST'])
 def login_form():
     if request.method == 'POST':
+        #redirect to index if method is post or any error
         return redirect(url_for('index'))
-    # show the form, it wasn't submitted
+
+    # show the login form with signin type
     return render_template('Login.html',sType="signIn")
 
 @application.route('/signup', methods=['GET', 'POST'])
 def signup_form():
     if request.method == 'POST':
+        #redirect to index if method is post or any error
         return redirect(url_for('index'))
 
-    # show the form, it wasn't submitted
+    # show the login form with signup type
     return render_template('Login.html',sType="signUp")
 
 
 @application.route('/signin/', methods=['GET', 'POST'])
 def signin_auth():
-    # if request.method == 'POST':
-    #     return redirect(url_for('index'))
     msg = ''
     msg_type = ''
     class_type = ''
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
-        # Create variables for easy access
+        # Variables to extract form data
         email = request.form['email']
         password = request.form['password']
         # Check if account exists using MySQL
@@ -97,7 +107,6 @@ def signin_auth():
             session['email'] = account['email']
             # User is loggedin show them the home page
             return redirect(url_for('home', account=account['name']))
-    
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Hmmm, the information you entered does not match our records. Please try again!'
@@ -107,8 +116,6 @@ def signin_auth():
 
 @application.route('/admin/', methods=['GET', 'POST'])
 def admin_auth():
-    # if request.method == 'POST':
-    #     return redirect(url_for('index'))
     msg = ''
     msg_type = ''
     class_type = ''
@@ -137,16 +144,6 @@ def admin_auth():
         return render_template('admin.html', flights=flights, travelRecords=travelRecords, itinerary=itinerary)
     return render_template('Login.html', msg=msg, msg_type=msg_type,sType="signIn", class_type=class_type)
 
-@application.route('/signin/home')
-def home():
-    # Check if user is loggedin
-    if 'loggedin' in session:
-        # User is loggedin show them the home page
-        print(request.args.get('account'))
-        return render_template('home.html', account=request.args.get('account'))
-    # User is not loggedin redirect to index page
-    return redirect(url_for('index'))
-
 @application.route('/signup/', methods=['GET', 'POST'])
 def signup_save():
     msg = ''
@@ -168,10 +165,6 @@ def signup_save():
             msg = 'Looks like the sky is empty! Please fill out the form!'
             msg_type = 'Error'
             class_type = 'sadFlappy'
-        # elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-        #     msg = 'Hmmm, I see that you are entering the wrong email address. Could you try changing it and try once again'
-        #     msg_type = 'Error'
-        #     class_type = 'sadFlappy'
         else:
             cursor.execute('INSERT INTO traveler_record (name, email, password) VALUES (%s, %s, %s)', (name, email, password,))
             mysql.connection.commit()
@@ -212,12 +205,9 @@ def profile_submit():
         gender = request.form['gender']
         passport = request.form['passport']
         country = request.form['country']
-        
         dt = datetime.date.today()
         today = datetime.datetime.combine(dt, datetime.time())
-        
         if (formatted_date < today):
-            #connection to Database
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
             cursor.execute('UPDATE traveler_record SET name = %s, gender = %s, DOB = %s, passport_num = %s, country_of_res = %s where email = %s', (name,gender,formatted_date,passport,country,email,))
             mysql.connection.commit()
@@ -234,7 +224,6 @@ def profile_submit():
         msg_type = 'Error'
         class_type = 'sadFlappy'
     # Show registration form with message (if any)
-    
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM traveler_record WHERE email = %s', (session['id'],))
     record = cursor.fetchone()
@@ -291,23 +280,19 @@ def addTrips():
 @application.route('/getOrigin', methods=['GET', 'POST'])
 def populateOrig():
     if 'loggedin' in session:
-    # We need all the account info for the user so we can display it on the profile page
         typeoftravel=request.form['travelType']
         print(typeoftravel)
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute("SELECT distinct origin FROM flights where travel_type=%s", (typeoftravel,))
         origins = cursor.fetchall()
-        #return jsonify({'name':records[0]['origin']})
         return jsonify(origins)
     return redirect(url_for('login_form'))
 
 @application.route('/getDest', methods=['GET', 'POST'])
 def populateDest():
     if 'loggedin' in session:
-    # We need all the account info for the user so we can display it on the profile page
         typeoftravel=request.form['travelType']
         origin = request.form['origin']
-    
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute("SELECT distinct destination FROM flights where travel_type=%s AND origin= %s", (typeoftravel,origin,))
         destinations = cursor.fetchall()
@@ -318,10 +303,8 @@ def populateDest():
 @application.route('/getFlightDetails', methods=['GET', 'POST'])
 def populateFlightDetails():
     if 'loggedin' in session:
-    # We need all the account info for the user so we can display it on the profile page
         origin = request.form['origin']
         destination = request.form['destination']
-       
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute("SELECT flight_num, date_format(departure_time, '%%h:%%i') as departure_time FROM flights where  origin= %s AND destination = %s", (origin,destination,))
         flightDetails = cursor.fetchone()
@@ -335,28 +318,23 @@ def trip_submit():
     class_type = ''
     personal_allw = ''
     checked_allw = ''
-    print('in')
     if request.method == 'POST' and ('typeoftravel' in request.form and request.form['typeoftravel']!='') and ('doj' in request.form and request.form['doj']!='') and ('origin' in request.form and request.form['origin']!='' ) and ('destination' in request.form and request.form['destination']!='') and ('flightno' in request.form and request.form['flightno']!='') and ('toj' in request.form and request.form['toj']!=''):
-        print('yes2')
         #defined variables
         flightno = request.form['flightno']
         doj = request.form['doj']
         typeOfTravel = request.form['typeoftravel']
         formatted_date = datetime.datetime.strptime(doj, "%Y-%m-%d")
 
-        # We need all the account info for the user so we can display it on the profile page
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM traveler_record WHERE email = %s', (session['id'],))
         record = cursor.fetchone()
         customerId = record['customer_id']
-
         if 'Domestic' in typeOfTravel:
             personal_allw = 1
             checked_allw = 0
         else:
             personal_allw = 1
             checked_allw = 2
-
         cursor.execute('SELECT * FROM itinerary WHERE type_of_travel = %s AND customer_id = %s AND flight_num = %s AND TripDate = %s', (typeOfTravel,customerId,flightno,formatted_date,))
         itinerary = cursor.fetchone()
         if itinerary:
@@ -402,15 +380,6 @@ def checklist_submit():
         header = 'Upcoming Trips'
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         
-        # cursor.execute('SELECT * FROM traveler_record WHERE email = %s', (session['id'],))
-        # record = cursor.fetchone()
-        # customer_id = record['customer_id']
-        
-        # #Get all trips
-        # cursor.execute('SELECT itinerary_id, customer_id, type_of_travel, f.flight_num, DATE_FORMAT(TripDate, "%%D %%M %%Y") TripDate, origin, destination, TIME_FORMAT(departure_time, "%%H:%%i") departure_time, TIME_FORMAT(arrival_time, "%%H:%%i") arrival_time, is_security FROM itinerary i, flights f WHERE i.flight_num = f.flight_num and customer_id = %s and i.TripDate >=Date(sysdate())', (customer_id,))
-        
-        # flights = cursor.fetchall()
-        
         if request.args.get('travelType') == 'International':
             print('inside')
             isId = request.form.get("item-2")
@@ -432,7 +401,6 @@ def checklist_submit():
                 isId = 'T'
             else:
                 isId = 'F'
-            
 
             if isCustoms == 'on':
                 isCustoms = 'T'
@@ -461,7 +429,6 @@ def checklist_submit():
                 isId = 'T'
             else:
                 isId = 'F'
-            
 
             if isCheckedBag == 'on':
                 isCheckedBag = 'T'
@@ -474,19 +441,25 @@ def checklist_submit():
         cursor.execute('SELECT * FROM traveler_record WHERE email = %s', (session['id'],))
         record = cursor.fetchone()
         customer_id = record['customer_id']
-        
         #Get all trips
         cursor.execute('SELECT itinerary_id, customer_id, type_of_travel, f.flight_num, DATE_FORMAT(TripDate, "%%D %%M %%Y") TripDate, origin, destination, TIME_FORMAT(departure_time, "%%H:%%i") departure_time, TIME_FORMAT(arrival_time, "%%H:%%i") arrival_time, is_security FROM itinerary i, flights f WHERE i.flight_num = f.flight_num and customer_id = %s and i.TripDate >=Date(sysdate())', (customer_id,))
-        
         flights = cursor.fetchall()
         return render_template('trips.html', record=record, flights=flights, header= header)
-    
     # User is not loggedin redirect to index page
     return redirect(url_for('login_form'))
 
+@application.route('/signin/home')
+def home():
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        # User is loggedin show them the home page
+        return render_template('home.html', account=request.args.get('account'))
+    # User is not loggedin redirect to index page
+    return redirect(url_for('index'))
+
 @application.route('/logout')
 def logout():
-    # Remove session data, this will log the user out
+   # Remove session data
    session.pop('loggedin', None)
    session.pop('id', None)
    session.pop('email', None)
