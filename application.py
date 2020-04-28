@@ -20,11 +20,11 @@ application = Flask(__name__)
 application.secret_key = 'xyz'
 
 # Database connection details below
-application.config['MYSQL_HOST'] = '***'
-application.config['MYSQL_USER'] = '***'
-application.config['MYSQL_PASSWORD'] = '***'
-application.config['MYSQL_PORT'] = 123
-application.config['MYSQL_DB'] = '***'
+application.config['MYSQL_HOST'] = 'flaskapp.crmt6c0dobbu.us-east-2.rds.amazonaws.com'
+application.config['MYSQL_USER'] = 'team13'
+application.config['MYSQL_PASSWORD'] = 'team132020'
+application.config['MYSQL_PORT'] = 3306
+application.config['MYSQL_DB'] = 'flaskapp'
 
 # Intialize MySQL
 mysql = MySQL(application)
@@ -409,8 +409,8 @@ def checklist_submit():
                 isCustoms = 'F'
                 isCheckedBag = 'F'
 
-                cursor.execute ('UPDATE itinerary set is_id = %s, is_checkin_counter = %s , is_customs = %s, is_immigration =%s , is_security= %s , is_head_to_gate=%s, is_personal_item =%s, is_checked_bag= %s where itinerary_id = %s', (isId,isCheckinCounter,isCustoms,isImmigration,isSecurity,isHeadToGate,isPersonalItem,isCheckedBag,itineraryId ))
-                mysql.connection.commit()
+            cursor.execute ('UPDATE itinerary set is_id = %s, is_checkin_counter = %s , is_customs = %s, is_immigration =%s , is_security= %s , is_head_to_gate=%s, is_personal_item =%s, is_checked_bag= %s where itinerary_id = %s', (isId,isCheckinCounter,isCustoms,isImmigration,isSecurity,isHeadToGate,isPersonalItem,isCheckedBag,itineraryId ))
+            mysql.connection.commit()
         else:
 
             isId = request.form.get("item-2")
