@@ -17,14 +17,14 @@ import re
 application = Flask(__name__)
 
 # Secret Key
-application.secret_key = 'ZoomTravel'
+application.secret_key = 'xyz'
 
 # Database connection details below
-application.config['MYSQL_HOST'] = 'flaskapp.crmt6c0dobbu.us-east-2.rds.amazonaws.com'
-application.config['MYSQL_USER'] = 'team13'
-application.config['MYSQL_PASSWORD'] = 'team132020'
-application.config['MYSQL_PORT'] = 3306
-application.config['MYSQL_DB'] = 'flaskapp'
+application.config['MYSQL_HOST'] = '***'
+application.config['MYSQL_USER'] = '***'
+application.config['MYSQL_PASSWORD'] = '***'
+application.config['MYSQL_PORT'] = 123
+application.config['MYSQL_DB'] = '***'
 
 # Intialize MySQL
 mysql = MySQL(application)
