@@ -2,7 +2,7 @@ astroid==2.3.3
 awsebcli==3.17.1
 botocore==1.14.17
 cement==2.8.2
-certifi==2020.4.5.1
+certifi==2022.12.7
 chardet==3.0.4
 click==7.1.1
 colorama==0.3.9
